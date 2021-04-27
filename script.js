@@ -11,11 +11,11 @@ var run = true;
 function main(line, column, id) {
     var identifier = document.getElementById("identifier").value;
     if(identifier == "Jogador X" && run == true) {
-        playerX(line, column, id);
+        player("X", line, column, id);
         document.querySelector("div#player").innerHTML = "Jogador O";
         document.getElementById("identifier").value = "Jogador O";
     } else if(run == true) {
-        playerO(line, column, id);
+        player("O", line, column, id);
         document.querySelector("div#player").innerHTML = "Jogador X";
         document.getElementById("identifier").value = "Jogador X";
     }
@@ -23,29 +23,16 @@ function main(line, column, id) {
     verify("X");
 }
 
-function playerX(line, column, id) {
-    if(board[line][column] == "O" || board[line][column] == "X") {
-        document.getElementById("jump-o").style.display = "none";
-        if(run == true) {
-        	document.getElementById("jump-x").style.display = "flex";
-        }
-    } else if(run == true) {
-        board[line][column] = "X";
-        document.getElementById(id).innerHTML = "X";
-        document.getElementById("jump-x").style.display = "none";
-        document.getElementById("jump-o").style.display = "none";
-    }
-}
-
-function playerO(line, column, id) {
+function player(args, line, column, id) {
     if(board[line][column] == "X" || board[line][column] == "O") {
-        document.getElementById("jump-x").style.display = "none";
+    	if(args == "X") document.getElementById("jump-o").style.display = "none";
+    	else document.getElementById("jump-x").style.display = "none";
         if(run == true) {
-        	document.getElementById("jump-o").style.display = "flex";
+        	document.getElementById(`jump-${args.toLowerCase()}`).style.display = "flex";
         }
     } else if(run == true) {
-        board[line][column] = "O";
-        document.getElementById(id).innerHTML = "O";
+        board[line][column] = args;
+        document.getElementById(id).innerHTML = args;
         document.getElementById("jump-o").style.display = "none";
         document.getElementById("jump-x").style.display = "none";
     }
