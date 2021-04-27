@@ -7,10 +7,12 @@ var board = [
 ];
 
 var run = true;
+var times = 0;
 
 function main(line, column, id) {
     var identifier = document.getElementById("identifier").value;
-    if(identifier == "Jogador X" && run == true) {
+	if(times == 9) gameTied();
+	if(identifier == "Jogador X" && run == true) {
         player("X", line, column, id);
         document.querySelector("div#player").innerHTML = "Jogador O";
         document.getElementById("identifier").value = "Jogador O";
@@ -32,10 +34,18 @@ function player(args, line, column, id) {
         }
     } else if(run == true) {
         board[line][column] = args;
+		times += 1;
         document.getElementById(id).innerHTML = args;
         document.getElementById("jump-o").style.display = "none";
         document.getElementById("jump-x").style.display = "none";
     }
+}
+
+function gameTied() {
+    const state = document.querySelector("div#player");
+    state.style.backgroundColor = "#d1cf4f";
+    state.innerHTML = "Empate!";
+    run = false;
 }
 
 function verify(args) {
@@ -66,5 +76,7 @@ function verify(args) {
         winner();
     } else if(board[0][2] == args && board[1][1] == args && board[2][0] == args) {
         winner();
+    } else if(times == 9) {
+    	gameTied();
     }
 }

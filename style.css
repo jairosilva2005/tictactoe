@@ -65,16 +65,30 @@ html, body {
     font-weight: 400;
     display: none;
     color: #FFFFFF;
+    animation: upAndDown 250ms;
 }
 
 .alert .jump-x {
     padding: 15px;
-    background-color: #f54949;
     position: absolute;
     top: 10px;
     left: 10px;
     border-radius: 5px;
     font-weight: 400;
     display: none;
-    color: #FFFFFF;
+    animation: upAndDown 250ms;
+    background-color: #f54949;
+    color: #ffffff;
+}
+
+@keyframes upAndDown {
+    0% {
+        background-color: rgba(255, 255, 255, 0.00);
+        color: rgba(255, 255, 255, 0.00);
+        transform: scale(0, 0);
+    } 100% {
+        background-color: #f54949;
+        color: #ffffff;
+        transform: scale(1, 1);
+    }
 }
